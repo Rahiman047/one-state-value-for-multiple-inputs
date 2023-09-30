@@ -1,35 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [users, setUsers] = useState([]);
+
+  const submitClicked = (e) => {
+    e.preventDefault();
+    const newId = uuidv4();
+    const newUser = {
+      name,
+      email,
+      id: newId,
+    };
+    setUsers((prevUsers) => [...prevUsers, newUser]);
+    setName("");
+    setEmail("");
+  };
+
+  const delUser = (id) => {
+    const deletedUsersList = users.filter((eachUser) => {
+      return eachUser.id !== id;
+    });
+    console.log(deletedUsersList);
+    setUsers(deletedUsersList);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div>
+      <form className="form-cont" onSubmit={submitClicked}>
+        <h1 className="form-heading">Controlled Inputs</h1>
+        <div className="form-input-comp">
+          <label className="form-label" htmlFor="name">
+            Name:-
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="form-input"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="form-input-comp">
+          <label className="form-label" htmlFor="email">
+            Email:-
+          </label>
+          <input
+            type="text"
+            id="email"
+            className="form-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="submit-btn-cont">
+          <button type="submit" className="submit-btn">
+            Submit
+          </button>
+        </div>
+      </form>
+      {users.map((eachUser) => {
+        return (
+          <DisplayUsers {...eachUser} key={eachUser.id} delUser={delUser} />
+        );
+      })}
+    </div>
+  );
 }
 
-export default App
+export default App;

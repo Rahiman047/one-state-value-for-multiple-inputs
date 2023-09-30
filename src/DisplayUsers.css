@@ -1,0 +1,38 @@
+.display-users {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+  background-color: #f0f0f0;
+  margin-top: 12px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 9px;
+  width: 700px;
+  cursor: pointer;
+}
+
+.display-users-cont {
+  width: 700px;
+  margin-left: 300px;
+}
+
+.display-user-name {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #1e90ff;
+  font-size: 24px;
+}
+
+.display-user-email {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #1e90ff;
+  font-size: 20px;
+}
+
+.display-users-remove-btn {
+  background-color: #bc8f8f;
+  cursor: pointer;
+  padding: 3px;
+  margin-top: 3px;
+}
