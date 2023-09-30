@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./App.css";
+import { v4 as uuidv4 } from "uuid";
+import DisplayUsers from "./DisplayUsers";
 
 function App() {
   const [userInputVal, setUserInputVal] = useState({
@@ -11,20 +13,12 @@ function App() {
 
   const handleChange = (e) => {
     setUserInputVal({ ...userInputVal, [e.target.name]: e.target.value });
-    console.log(userInputVal);
   };
 
   const submitClicked = (e) => {
     e.preventDefault();
     const newId = uuidv4();
-    const newUser = {
-      name,
-      email,
-      id: newId,
-    };
-    setUsers((prevUsers) => [...prevUsers, newUser]);
-    setName("");
-    setEmail("");
+    setUsers((prevUsers) => [{ ...prevUsers, id: newId, userInputVal }]);
   };
 
   const delUser = (id) => {
