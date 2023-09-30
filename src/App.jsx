@@ -2,9 +2,17 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [userInputVal, setUserInputVal] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [users, setUsers] = useState([]);
+
+  const handleChange = (e) => {
+    setUserInputVal({ ...userInputVal, [e.target.name]: e.target.value });
+    console.log(userInputVal);
+  };
 
   const submitClicked = (e) => {
     e.preventDefault();
@@ -39,8 +47,9 @@ function App() {
             type="text"
             id="name"
             className="form-input"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={userInputVal.name}
+            name="name"
+            onChange={handleChange}
           />
         </div>
         <div className="form-input-comp">
@@ -48,11 +57,25 @@ function App() {
             Email:-
           </label>
           <input
-            type="text"
+            type="email"
             id="email"
             className="form-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userInputVal.email}
+            onChange={handleChange}
+            name="email"
+          />
+        </div>
+        <div className="form-input-comp">
+          <label className="form-label" htmlFor="email">
+            Password:-
+          </label>
+          <input
+            type="password"
+            id="email"
+            className="form-input"
+            value={userInputVal.password}
+            onChange={handleChange}
+            name="password"
           />
         </div>
         <div className="submit-btn-cont">
